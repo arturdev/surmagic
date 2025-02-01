@@ -309,14 +309,9 @@ public class XCFCommand {
             return
         }
         
-        arguments.append("-sdk")
+        arguments.append("-destination")
+        arguments.append(target.sdk.destination)
 
-        if target.sdk == .macOSCatalyst {
-            arguments.append(Target.SDK.macOS.description)
-        } else {
-            arguments.append(target.sdk.description)
-        }
-        
         arguments.append("-scheme")
         arguments.append(target.scheme)
         
@@ -325,9 +320,7 @@ public class XCFCommand {
 
         arguments.append("SKIP_INSTALL=NO")
 
-        if target.sdk == .macOSCatalyst {
-            arguments.append("SUPPORTS_MACCATALYST=YES")
-        }
+        arguments.append("BUILD_LIBRARY_FOR_DISTRIBUTION=YES")
 
         task.arguments = arguments
         
